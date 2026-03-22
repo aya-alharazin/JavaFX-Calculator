@@ -1,6 +1,4 @@
-# JavaFX Calculator — README
-
-## Project Overview
+##  Overview
 
 This is a simple desktop calculator application built using JavaFX. It
 supports the four basic arithmetic operations — addition, subtraction,
@@ -123,54 +121,6 @@ also resets the display to "0".
 | `createBtn(String)` | method | Factory method — creates a styled Button |
 | `calculate(int)` | method | Performs the arithmetic and returns the result |
 | `clear()` | method | Resets all state variables |
-
----
-
-## Known Limitations and Bugs
-
-### Bug 1 — Second Operand is Parsed as Integer
-
-In the equals handler, the second number is parsed using
-`Integer.parseInt()` instead of `Float.parseFloat()`. This means that if
-the user enters a decimal second number such as 3.5, the application will
-throw a `NumberFormatException` and crash. The fix is to parse the second
-number using `Float.parseFloat()` and update the `calculate()` method to
-accept a float parameter instead of int.
-
-### Bug 2 — No Operator Selected Before Equals
-
-If the user presses equals without first pressing an operator button, the
-variable `op` is an empty string and the switch statement in `calculate()`
-matches no case, returning 0. Additionally, calling `op.equals("/")` in the
-equals handler will work correctly because `op` is initialized to null only
-conceptually — but if `op` is never assigned and remains uninitialized, a
-NullPointerException could occur depending on the execution path. A null
-or empty check on `op` before processing equals is recommended.
-
-### Bug 3 — No Consecutive Operations
-
-After pressing equals, the result is shown but the user cannot immediately
-use that result as the first operand of a new operation by pressing another
-operator button. The result is only preserved in the display — `firstNumber`
-has already been reset by `clear()`. Pressing an operator after equals will
-correctly read the displayed result, so this actually works, but it is not
-by explicit design and should be documented or made intentional.
-
-### Bug 4 — Negative Numbers Not Supported
-
-There is no plus/minus toggle button. The user cannot enter a negative
-number as the first operand. If a subtraction results in a negative value
-the display shows it correctly, but the user cannot type a negative number
-directly.
-
-### Bug 5 — Integer Digit Buttons Use Anonymous Inner Classes
-
-The digit buttons 0 through 9 use the verbose anonymous inner class syntax
-for their event handlers, while the operator and function buttons use the
-more concise lambda syntax. For consistency and readability, all handlers
-should use lambdas.
-
-
 ---
 
 *Programming 3 - Lab CSCI 2108 · Aya Nabil Alharazin 2026*
