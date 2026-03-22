@@ -21,7 +21,7 @@ public class Calculator extends Application {
     TextField tf = new TextField();
     BorderPane p = new BorderPane();
     boolean startNewNumber=true;
-    String op;
+    String op="";
     float firstNumber;
 
     public static void main(String[] args) {
@@ -97,7 +97,7 @@ public class Calculator extends Application {
             startNewNumber=true;
                 });
         equal.setOnAction(e->{
-            int secondNumber = Integer.parseInt(tf.getText());
+            float secondNumber = Float.parseFloat(tf.getText());
             if(op.equals("/") && secondNumber == 0){
                 tf.setText("error");
                 clear();
@@ -181,8 +181,8 @@ public class Calculator extends Application {
         return b;
     }
     
-    private float calculate(int second){
-        float result=0;
+    private float calculate(float second){
+        float result=second;
         switch(op){
             case "+":
                 result= firstNumber+second;
